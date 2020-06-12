@@ -5,3 +5,4 @@
 - Add `AbstractCompilerPass`
 - Add `AbstractConfiguration`
 - Add `AbstractExtension`
+- Add `AbstractBundle`

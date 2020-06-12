@@ -22,17 +22,6 @@ composer require richcongress/bundle-toolbox
 
 # Quick start
 
-## CompilerPass
-
-When creating a new CompilerPass, use the `AbstractCompilerPass` and add them from the `build()` function of your bundle.
-
-```php
-public function build(ContainerBuilder $container): void
-{
-    CompilerPass::add($container);
-}
-```
-
 ## Configuration
 
 When creating a new Configuration, use the `AbstractConfiguration`, set correctly the `CONFIG_NODE` constant, and set the `buildConfiguration` function. The argument is the root node of your configuration.
@@ -66,6 +55,23 @@ class BundleExtension extends AbstractExtension
     }
 }
 ```
+
+## CompilerPass
+
+When creating a new CompilerPass, use the `AbstractCompilerPass` and add them from the `build()` function of your bundle.
+
+```php
+public function build(ContainerBuilder $container): void
+{
+    CompilerPass::add($container);
+}
+```
+
+You can also configure its Type and Priority using respectively the constants `TYPE` and `PRIORITY`.
+
+## Bundle
+
+When creating a new Bundle, use the `AbstractBundle`. If you want to add a CompilerPass, simply add it to the `COMPILER_PASSES` constant. If the compiler is an instance of `AbstractCompilerPass`, it will use the `add` method. If not, it will be added to the container using the default values.
 
 # Versioning
 

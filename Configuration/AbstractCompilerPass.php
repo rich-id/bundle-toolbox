@@ -3,6 +3,7 @@
 namespace RichCongress\BundleToolbox\Configuration;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -14,6 +15,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 abstract class AbstractCompilerPass implements CompilerPassInterface
 {
+    public const TYPE = PassConfig::TYPE_BEFORE_OPTIMIZATION;
+    public const PRIORITY = 0;
+
     /**
      * @param ContainerBuilder $container
      *
@@ -22,7 +26,7 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
     public static function add(ContainerBuilder $container): self
     {
         $compiler = new static();
-        $container->addCompilerPass($compiler);
+        $container->addCompilerPass($compiler, static::TYPE, static::PRIORITY);
 
         return $compiler;
     }
