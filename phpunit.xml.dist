@@ -38,7 +38,7 @@
                 <directory>Tests</directory>
                 <directory>vendor</directory>
                 <directory>var</directory>
-                <file>RichCongressMonologExtraBundle.php</file>
+                <file>RichCongressBundleToolboxBundle.php</file>
                 <file>phpunit-filter.php</file>
             </exclude>
         </whitelist>

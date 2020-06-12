@@ -26,6 +26,11 @@ class DummyConfiguration extends AbstractConfiguration
         $rootNode
             ->children()
                 ->booleanNode('test')->defaultFalse()->end()
+                ->arrayNode('array_test')
+                    ->normalizeKeys(false)
+                    ->useAttributeAsKey('key')
+                    ->scalarPrototype()->end()
+                ->end()
             ->end();
     }
 }

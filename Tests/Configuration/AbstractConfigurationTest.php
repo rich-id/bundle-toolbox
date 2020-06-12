@@ -7,6 +7,7 @@ use RichCongress\BundleToolbox\Tests\Resources\BadDummyConfiguration;
 use RichCongress\BundleToolbox\Tests\Resources\DummyConfiguration;
 use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\BooleanNode;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition;
 
 /**
@@ -41,7 +42,8 @@ class AbstractConfigurationTest extends TestCase
         $treeBuilder = $config->getConfigTreeBuilder();
         $childsNode = $treeBuilder->getRootNode()->getChildNodeDefinitions();
 
-        self::assertCount(1, $childsNode);
+        self::assertCount(2, $childsNode);
         self::assertInstanceOf(BooleanNodeDefinition::class, current($childsNode));
+        self::assertInstanceOf(ArrayNodeDefinition::class, next($childsNode));
     }
 }

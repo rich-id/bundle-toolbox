@@ -36,11 +36,37 @@ class AbstractExtensionTest extends TestCase
      */
     public function testExtensionLoadConfigurationCorrectly(): void
     {
+        $config = [
+            'test'       => true,
+            'array_test' => [
+                'testing'
+            ]
+        ];
+
+        $container = new ContainerBuilder();
+        $this->extension->load([DummyConfiguration::CONFIG_NODE => $config], $container);
+
+        self::assertEquals($config, $container->getParameter(DummyConfiguration::CONFIG_NODE));
+        self::assertTrue($container->getParameter(DummyConfiguration::CONFIG_NODE . '.test'));
+        self::assertEquals(['testing'], $container->getParameter(DummyConfiguration::CONFIG_NODE . '.array_test'));
+    }
+
+    /**
+     * @return void
+     */
+    public function testExtensionLoadDefaultConfigurationCorrectly(): void
+    {
+        $expected = [
+            'test'       => false,
+            'array_test' => []
+        ];
+
         $container = new ContainerBuilder();
         $this->extension->load([], $container);
 
-        self::assertEquals(['test' => false], $container->getParameter(DummyConfiguration::CONFIG_NODE));
+        self::assertEquals($expected, $container->getParameter(DummyConfiguration::CONFIG_NODE));
         self::assertFalse($container->getParameter(DummyConfiguration::CONFIG_NODE . '.test'));
+        self::assertEmpty($container->getParameter(DummyConfiguration::CONFIG_NODE . '.array_test'));
     }
 
     /**
