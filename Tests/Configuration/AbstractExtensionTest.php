@@ -39,7 +39,7 @@ class AbstractExtensionTest extends TestCase
         $config = [
             'test'       => true,
             'array_test' => [
-                'testing'
+                'testing' => true
             ]
         ];
 
@@ -48,7 +48,7 @@ class AbstractExtensionTest extends TestCase
 
         self::assertEquals($config, $container->getParameter(DummyConfiguration::CONFIG_NODE));
         self::assertTrue($container->getParameter(DummyConfiguration::CONFIG_NODE . '.test'));
-        self::assertEquals(['testing'], $container->getParameter(DummyConfiguration::CONFIG_NODE . '.array_test'));
+        self::assertEquals(['testing' => true], $container->getParameter(DummyConfiguration::CONFIG_NODE . '.array_test'));
     }
 
     /**
