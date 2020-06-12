@@ -1,0 +1,40 @@
+{
+    "name": "richcongress/bundle-toolbox",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "A set of classes and tools to quickly build a bundle",
+    "authors": [
+        {
+            "name": "RichCongress",
+            "homepage": "https://www.richcongress.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RichCongress\\BundleToolbox\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\RichCongress\\BundleToolbox\\": "Tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "graylog2/gelf-php": "^1.5",
+        "symfony/config": "^3.0 || ^4.0",
+        "symfony/dependency-injection": "^3.0 || ^4.0",
+        "symfony/monolog-bundle": "^3.0 || ^4.0",
+        "symfony/yaml": "^3.0 || ^4.0"
+    },
+    "require-dev": {
+        "php-coveralls/php-coveralls": "^2.1",
+        "richcongress/unit-bundle": "2.0.0.x-dev",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "discard-changes": true,
+        "sort-packages": true
+    }
+}

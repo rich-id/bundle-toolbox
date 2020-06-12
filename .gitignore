@@ -1,0 +1,28 @@
+# Managed by Composer
+/bin
+/vendor
+
+# PHPUnit
+/phpunit.xml
+/phpunit-*.xml
+
+# Auto-saved files
+*~
+
+# Mac
+.DS_store
+
+# PhpStorm
+.idea
+
+# Composer
+/composer.phar
+
+# Build data
+/build/
+
+# Coverage
+/coverage/
+
+# Database
+/.db

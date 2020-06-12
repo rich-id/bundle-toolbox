@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+    application:
+        container_name: bundle_toolbox_app
+        image: richcongress/php:7.3
+        volumes:
+            - .:/app
