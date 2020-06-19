@@ -41,6 +41,12 @@ class Configuration extends AbstractConfiguration
 }
 ```
 
+From your bundle, you could use the `get` static function to quickly retrieve the bundle configuration.
+
+```php
+$this->specificConfiguration = Configuration::get($parameterBag, 'your_sub_configuration');
+```
+
 ## Extension
 
 When creating the Extension, extends from `AbstractExtension`. You now have a new function available, `parseConfiguration` which process the configuration and load it in the ParameterBag of your container.
@@ -68,6 +74,21 @@ public function build(ContainerBuilder $container): void
 ```
 
 You can also configure its Type and Priority using respectively the constants `TYPE` and `PRIORITY`.
+
+You can use the `MANDATORY_SERVICES` constant to check quickly if the required services exists:
+
+```php
+public const MANDATORY_SERVICES = ['service1', 'service2', 'service3'];
+
+public function process(ContainerBuilder $container): void
+{
+    if (!self::checkMandatoryServices($container)) {
+        return;
+    }
+
+    // ...
+}
+```
 
 ## Bundle
 

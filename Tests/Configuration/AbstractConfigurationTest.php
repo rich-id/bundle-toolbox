@@ -9,6 +9,8 @@ use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\BooleanNode;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition;
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
  * Class AbstractConfigurationTest
@@ -45,5 +47,38 @@ class AbstractConfigurationTest extends TestCase
         self::assertCount(2, $childsNode);
         self::assertInstanceOf(BooleanNodeDefinition::class, current($childsNode));
         self::assertInstanceOf(ArrayNodeDefinition::class, next($childsNode));
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetConfigurationKey(): void
+    {
+        $key = DummyConfiguration::getKey('test');
+
+        self::assertEquals('bundle_toolbox_test.test', $key);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetConfigurationFromParameterBagNotFound(): void
+    {
+        $parameterBag = new ParameterBag();
+
+        $this->expectException(ParameterNotFoundException::class);
+        DummyConfiguration::get('not_found', $parameterBag);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetConfigurationFromParameterBagFound(): void
+    {
+        $parameterBag = new ParameterBag();
+        $parameterBag->set('bundle_toolbox_test.test', true);
+
+        $value = DummyConfiguration::get('test', $parameterBag);
+        self::assertTrue($value);
     }
 }

@@ -17,6 +17,7 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
 {
     public const TYPE = PassConfig::TYPE_BEFORE_OPTIMIZATION;
     public const PRIORITY = 0;
+    public const MANDATORY_SERVICES = [];
 
     /**
      * @param ContainerBuilder $container
@@ -29,5 +30,21 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
         $container->addCompilerPass($compiler, static::TYPE, static::PRIORITY);
 
         return $compiler;
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return bool
+     */
+    public static function checkMandatoryServices(ContainerBuilder $container): bool
+    {
+        foreach ((array) static::MANDATORY_SERVICES as $serviceId) {
+            if (!$container->has($serviceId)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -14,6 +14,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class DummyCompilerPass extends AbstractCompilerPass
 {
+    public const MANDATORY_SERVICES = ['entity_manager'];
+
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return void
+     */
     public function process(ContainerBuilder $container): void
     {
         // TODO: Implement process() method.

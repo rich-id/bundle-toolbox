@@ -5,6 +5,7 @@ namespace RichCongress\BundleToolbox\Configuration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Class AbstractConfiguration
@@ -42,4 +43,25 @@ abstract class AbstractConfiguration implements ConfigurationInterface
      * @return void
      */
     abstract protected function buildConfiguration(ArrayNodeDefinition $rootNode): void;
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    public static function getKey(string $key): string
+    {
+        return sprintf('%s.%s', static::CONFIG_NODE, $key);
+    }
+
+    /**
+     * @param string                $key
+     * @param ParameterBagInterface $parameterBag
+     *
+     * @return string|array|int|bool|mixed
+     */
+    public static function get(string $key, ParameterBagInterface $parameterBag)
+    {
+        return $parameterBag->get(static::getKey($key));
+    }
 }

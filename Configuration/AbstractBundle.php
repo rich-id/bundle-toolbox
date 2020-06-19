@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * @author    Nicolas Guilloux <nguilloux@richcongress.com>
  * @copyright 2014 - 2020 RichCongress (https://www.richcongress.com)
  */
-class AbstractBundle extends Bundle
+abstract class AbstractBundle extends Bundle
 {
     public const COMPILER_PASSES = [];
 

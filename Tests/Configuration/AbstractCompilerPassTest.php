@@ -5,6 +5,7 @@ namespace RichCongress\BundleToolbox\Tests\Configuration;
 use RichCongress\Bundle\UnitBundle\TestCase\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class AbstractCompilerPassTest
@@ -26,5 +27,26 @@ class AbstractCompilerPassTest extends TestCase
         $compiler = DummyCompilerPass::add($container);
 
         self::assertNotNull($compiler);
+    }
+
+    /**
+     * @return void
+     */
+    public function testCheckMandatoryServicesFailure(): void
+    {
+        $container = new ContainerBuilder();
+
+        self::assertFalse(DummyCompilerPass::checkMandatoryServices($container));
+    }
+
+    /**
+     * @return void
+     */
+    public function testCheckMandatoryServicesSuccess(): void
+    {
+        $container = new ContainerBuilder();
+        $container->set('entity_manager', new static());
+
+        self::assertTrue(DummyCompilerPass::checkMandatoryServices($container));
     }
 }
