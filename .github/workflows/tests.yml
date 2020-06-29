@@ -28,11 +28,11 @@ jobs:
 
             - name: Execute the tests 🔧
               run: |
-                  docker-compose exec -T application php -d zend_extension=xdebug.so ./bin/phpunit --prepend phpunit-filter.php --configuration phpunit.xml.dist --colors=never --coverage-clover clover.xml
+                  docker-compose exec -T application php -d zend_extension=xdebug.so ./bin/phpunit --prepend phpunit-filter.php --configuration phpunit.xml.dist --colors=never --coverage-clover build/logs/clover.xml
 
             - name: Upload results to Coveralls 🚀
               env:
                   COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   docker-compose exec -T application composer global require twinh/php-coveralls --prefer-dist --no-interaction --no-progress
-                  docker-compose exec -T -e COVERALLS_REPO_TOKEN="$COVERALLS_REPO_TOKEN" application /home/application/.composer/vendor/bin/php-coveralls --coverage_clover=clover.xml -v
+                  docker-compose exec -T -e COVERALLS_REPO_TOKEN="$COVERALLS_REPO_TOKEN" application /home/application/.composer/vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
