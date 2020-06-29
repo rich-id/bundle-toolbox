@@ -5,4 +5,5 @@ services:
         image: richcongress/php:7.3
         volumes:
             - .:/app
+            - ~/.composer:/home/application/.composer:cached
 
