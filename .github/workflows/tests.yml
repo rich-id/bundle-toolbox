@@ -30,4 +30,4 @@ jobs:
                   COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   docker-compose exec -T application composer global require twinh/php-coveralls
-                  docker-compose exec -T application php-coveralls --coverage-closer=clover.xml -v
+                  docker-compose exec -T application php-coveralls --coverage_clover=clover.xml -v
