@@ -13,6 +13,7 @@ jobs:
             - name: Start docker 🔧
               run: |
                   mkdir vendor
+                  chmod 777 -R ./vendor
                   docker-compose up -d
 
             - name: Install the dependencies 🔧
