@@ -3,6 +3,7 @@
 ## 1.1.1
 
 - Remove useless dependencies, that could produce some Composer issues.
+- Move from Travis to Github Actions
 
 ## 1.1.0
 
