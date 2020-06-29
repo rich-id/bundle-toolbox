@@ -2,7 +2,7 @@
 
 namespace RichCongress\BundleToolbox\Tests\Configuration;
 
-use RichCongress\Bundle\UnitBundle\TestCase\TestCase;
+use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyBundle;
 use RichCongress\BundleToolbox\Tests\Resources\DummyCompilerPass;
 use RichCongress\BundleToolbox\Tests\Resources\DummyRegularCompilerPass;

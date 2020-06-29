@@ -2,7 +2,7 @@
 
 namespace RichCongress\BundleToolbox\Tests\Configuration;
 
-use RichCongress\Bundle\UnitBundle\TestCase\TestCase;
+use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyConfiguration;
 use RichCongress\BundleToolbox\Tests\Resources\DummyExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,8 +26,10 @@ class AbstractExtensionTest extends TestCase
     /**
      * @return void
      */
-    protected function beforeTest(): void
+    protected function setUp(): void
     {
+        parent::setUp();
+
         $this->extension = new DummyExtension();
     }
 

@@ -2,10 +2,9 @@
 
 namespace RichCongress\BundleToolbox\Tests\Configuration;
 
-use RichCongress\Bundle\UnitBundle\TestCase\TestCase;
+use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class AbstractCompilerPassTest

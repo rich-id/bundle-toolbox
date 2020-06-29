@@ -24,10 +24,6 @@
         </testsuite>
     </testsuites>
 
-    <extensions>
-        <extension class="RichCongress\Bundle\UnitBundle\PHPUnit\PHPUnitExtension" />
-    </extensions>
-
     <filter>
         <whitelist>
             <directory>.</directory>
