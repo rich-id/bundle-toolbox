@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Remove useless dependencies, that could produce some Composer issues.
+
 ## 1.1.0
 
 - Add `AbstractCompilerPass::checkMandatoryServices` to quickly checks if the services listed in th e`MANDATORY_SERVICES` constant exists in the container.
