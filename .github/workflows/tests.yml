@@ -12,7 +12,7 @@ jobs:
 
             - name: Start docker 🔧
               run: |
-                  chown 777 -R ./
+                  mkdir vendor
                   docker-compose up -d
 
             - name: Install the dependencies 🔧
