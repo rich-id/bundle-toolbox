@@ -3,25 +3,29 @@ on: [push, pull_request]
 
 jobs:
     build-and-test:
-        runs-on: richcongress/php:7.3
+        runs-on: ubuntu-18.04
         steps:
             - name: Checkout 🛎️
               uses: actions/checkout@v2
               with:
                   persist-credentials: false
 
+            - name: Start docker 🔧
+              run: |
+                  docker-compose up -d
+
             - name: Install the dependencies 🔧
               run: |
-                  composer install --prefer-dist --no-interaction
-                  php -d zend_extension=xdebug.so ./bin/phpunit --configuration phpunit.xml.dist --dump-xdebug-filter phpunit-filter.php
+                  docker-compose exec application composer install --prefer-dist --no-interaction
+                  docker-compose exec application php -d zend_extension=xdebug.so ./bin/phpunit --configuration phpunit.xml.dist --dump-xdebug-filter phpunit-filter.php
 
             - name: Execute the tests 🔧
               run: |
-                  php -d zend_extension=xdebug.so ./bin/phpunit --prepend phpunit-filter.php --configuration phpunit.xml.dist --colors=never --coverage-clover clover.xml
+                  docker-compose exec application php -d zend_extension=xdebug.so ./bin/phpunit --prepend phpunit-filter.php --configuration phpunit.xml.dist --colors=never --coverage-clover clover.xml
 
             - name: Upload results to Coveralls 🚀
               env:
                   COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  composer global require twinh/php-coveralls
-                  php-coveralls --coverage_closer=clover.xml -v
+                  docker-compose exec application composer global require twinh/php-coveralls
+                  docker-compose exec application php-coveralls --coverage_closer=clover.xml -v
