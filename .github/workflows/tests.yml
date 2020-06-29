@@ -1,0 +1,26 @@
+name: Test the bundle
+on: [push, pull_request]
+
+jobs:
+    build-and-test:
+        runs-on: richcongress/php:7.3
+        steps:
+            - name: Checkout 🛎️
+              uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
+
+            - name: Install the dependencies 🔧
+              run: |
+                  composer install --prefer-dist --no-interaction
+                  php -d zend_extension=xdebug.so ./bin/phpunit --configuration phpunit.xml.dist --dump-xdebug-filter phpunit-filter.php
+
+            - name: Execute the tests 🔧
+              run: |
+                  php -d zend_extension=xdebug.so ./bin/phpunit --prepend phpunit-filter.php --configuration phpunit.xml.dist --colors=never --coverage-clover build/logs/clover.xml
+
+            - name: Upload results to Coveralls 🚀
+              with:
+                  COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              runs: |
+                  php vendor/php-coveralls/php-coveralls/bin/php-coveralls -v
