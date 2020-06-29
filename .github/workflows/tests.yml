@@ -12,6 +12,7 @@ jobs:
 
             - name: Start docker 🔧
               run: |
+                  export COMPOSE_INTERACTIVE_NO_CLI=1
                   docker-compose up -d
 
             - name: Install the dependencies 🔧
