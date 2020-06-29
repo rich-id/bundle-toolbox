@@ -25,8 +25,7 @@ jobs:
 
             - name: Upload results to Coveralls 🚀
               env:
-                  COVERALLS_RUN_LOCALLY: 1
                   COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  docker-compose exec -T application composer global require twinh/php-coveralls --prefer-dist --no-interaction --no-progress
-                  docker-compose exec -T application php-coveralls --coverage_clover=build/logs/clover.xml -v
+                  composer global require twinh/php-coveralls --prefer-dist --no-interaction --no-progress
+                  php-coveralls --coverage_clover=build/logs/clover.xml -v
