@@ -18,7 +18,7 @@ jobs:
 
             - name: Install the dependencies 🔧
               run: |
-                  docker-compose exec -T application composer install --prefer-dist --no-interaction
+                  docker-compose exec -T application composer install --prefer-dist --no-interaction --no-progress
                   docker-compose exec -T application php -d zend_extension=xdebug.so ./bin/phpunit --configuration phpunit.xml.dist --dump-xdebug-filter phpunit-filter.php
 
             - name: Execute the tests 🔧
@@ -30,4 +30,4 @@ jobs:
                   COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   docker-compose exec -T application composer global require twinh/php-coveralls
-                  docker-compose exec -T application php-coveralls --coverage_closer=clover.xml -v
+                  docker-compose exec -T application php-coveralls --coverage-closer=clover.xml -v
