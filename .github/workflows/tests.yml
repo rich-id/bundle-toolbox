@@ -12,12 +12,10 @@ jobs:
 
             - name: Start docker 🔧
               run: |
-                  export COMPOSE_INTERACTIVE_NO_CLI=1
+                  chown 777 -R ./
                   docker-compose up -d
 
             - name: Install the dependencies 🔧
-              env:
-                  COMPOSE_INTERACTIVE_NO_CLI: 1
               run: |
                   docker-compose exec -T application composer install --prefer-dist --no-interaction
                   docker-compose exec -T application php -d zend_extension=xdebug.so ./bin/phpunit --configuration phpunit.xml.dist --dump-xdebug-filter phpunit-filter.php
