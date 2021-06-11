@@ -3,6 +3,7 @@
 namespace RichCongress\BundleToolbox\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -16,21 +17,18 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 abstract class AbstractConfiguration implements ConfigurationInterface
 {
-    public const CONFIG_NODE = '';
+    protected const CONFIG_NODE = '';
 
     /**
      * @return TreeBuilder|void
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        if (static::CONFIG_NODE === '') {
-            throw new \InvalidArgumentException('You need to define the constant CONFIG_NODE for the class ' . static::class);
-        }
-
-        $treeBuilder = new TreeBuilder(self::CONFIG_NODE);
+        $configNode = static::getConfigNode();
+        $treeBuilder = new TreeBuilder($configNode);
         $rootNode = \method_exists(TreeBuilder::class, 'getRootNode')
             ? $treeBuilder->getRootNode()
-            : $treeBuilder->root(self::CONFIG_NODE);
+            : $treeBuilder->root($configNode);
 
         $this->buildConfiguration($rootNode);
 
@@ -42,16 +40,17 @@ abstract class AbstractConfiguration implements ConfigurationInterface
      *
      * @return void
      */
-    abstract protected function buildConfiguration(ArrayNodeDefinition $rootNode): void;
+    protected function buildConfiguration(ArrayNodeDefinition $rootNode): void
+    {
+        $children = $rootNode->children();
+        $this->buildConfig($children);
+    }
 
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
+    abstract protected function buildConfig(NodeBuilder $nodeBuilder): void;
+
     public static function getKey(string $key): string
     {
-        return sprintf('%s.%s', static::CONFIG_NODE, $key);
+        return sprintf('%s.%s', self::getConfigNode(), $key);
     }
 
     /**
@@ -63,5 +62,14 @@ abstract class AbstractConfiguration implements ConfigurationInterface
     public static function get(string $key, ParameterBagInterface $parameterBag)
     {
         return $parameterBag->get(static::getKey($key));
+    }
+
+    public static function getConfigNode(): string
+    {
+        if (static::CONFIG_NODE === '') {
+            throw new \InvalidArgumentException('You need to define the constant CONFIG_NODE for the class ' . static::class);
+        }
+
+        return static::CONFIG_NODE;
     }
 }

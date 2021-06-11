@@ -3,7 +3,7 @@
 namespace RichCongress\BundleToolbox\Tests\Resources;
 
 use RichCongress\BundleToolbox\Configuration\AbstractConfiguration;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 /**
  * Class DummyConfiguration
@@ -16,21 +16,14 @@ class DummyConfiguration extends AbstractConfiguration
 {
     public const CONFIG_NODE = 'bundle_toolbox_test';
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     *
-     * @return void
-     */
-    protected function buildConfiguration(ArrayNodeDefinition $rootNode): void
+    protected function buildConfig(NodeBuilder $nodeBuilder): void
     {
-        $rootNode
-            ->children()
-                ->booleanNode('test')->defaultFalse()->end()
-                ->arrayNode('array_test')
-                    ->normalizeKeys(false)
-                    ->useAttributeAsKey('key')
-                    ->scalarPrototype()->end()
-                ->end()
+        $nodeBuilder
+            ->booleanNode('test')->defaultFalse()->end()
+            ->arrayNode('array_test')
+                ->normalizeKeys(false)
+                ->useAttributeAsKey('key')
+                ->scalarPrototype()->end()
             ->end();
     }
 }

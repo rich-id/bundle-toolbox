@@ -4,6 +4,7 @@ namespace RichCongress\BundleToolbox\Tests\Resources;
 
 use RichCongress\BundleToolbox\Configuration\AbstractConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 /**
  * Class BadDummyConfiguration
@@ -14,12 +15,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  */
 class BadDummyConfiguration extends AbstractConfiguration
 {
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     *
-     * @return void
-     */
-    protected function buildConfiguration(ArrayNodeDefinition $rootNode): void
+    protected function buildConfig(NodeBuilder $nodeBuilder): void
     {
         // Empty, should throw an error before reaching this function
     }

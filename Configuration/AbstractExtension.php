@@ -29,8 +29,8 @@ abstract class AbstractExtension extends Extension
     {
         $bundleConfig = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter($configuration::CONFIG_NODE, $bundleConfig);
-        $this->setParameters($container, $configuration::CONFIG_NODE, $bundleConfig);
+        $container->setParameter($configuration::getConfigNode(), $bundleConfig);
+        $this->setParameters($container, $configuration::getConfigNode(), $bundleConfig);
     }
 
     /**
@@ -40,7 +40,7 @@ abstract class AbstractExtension extends Extension
      *
      * @return void
      */
-    protected function setParameters(ContainerBuilder $container, $name, array $config): void
+    protected function setParameters(ContainerBuilder $container, string $name, array $config): void
     {
         foreach ($config as $key => $parameter) {
             $container->setParameter($name . '.' . $key, $parameter);
