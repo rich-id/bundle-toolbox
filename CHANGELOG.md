@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Add a more handy function in AbstractConfiguration
+
 ## 1.1.1
 
 - Remove useless dependencies, that could produce some Composer issues.
