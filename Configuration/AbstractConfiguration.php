@@ -46,7 +46,10 @@ abstract class AbstractConfiguration implements ConfigurationInterface
         $this->buildConfig($children);
     }
 
-    abstract protected function buildConfig(NodeBuilder $nodeBuilder): void;
+    protected function buildConfig(NodeBuilder $nodeBuilder): void
+    {
+        // Overrides to add children
+    }
 
     public static function getKey(string $key): string
     {
