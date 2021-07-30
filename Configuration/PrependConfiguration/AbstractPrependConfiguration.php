@@ -24,8 +24,12 @@ abstract class AbstractPrependConfiguration
         return \array_pop($config) ?? [];
     }
 
-    protected function prependExtensionConfig(string $extensionName, array $config): array
+    protected function prependExtensionConfig(string $extensionName, array $config): ?array
     {
+        if (!$this->container->hasExtension($extensionName)) {
+            return null;
+        }
+
         $oldConfig = $this->getExtensionConfig($extensionName);
         $newConfig = array_merge($oldConfig, $config);
         $this->container->prependExtensionConfig($extensionName, $newConfig);
