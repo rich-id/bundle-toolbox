@@ -2,6 +2,7 @@
 
 namespace RichCongress\BundleToolbox\Tests\Configuration;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyBundle;
 use RichCongress\BundleToolbox\Tests\Resources\DummyCompilerPass;

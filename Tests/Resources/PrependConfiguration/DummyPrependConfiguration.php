@@ -10,6 +10,14 @@ final class DummyPrependConfiguration extends AbstractPrependConfiguration
 
     protected function prepend(): void
     {
-        static::$flag = true;
+        self::$flag = true;
+
+        $this->prependExtensionConfig('dummy', [
+            'new' => true,
+        ]);
+
+        $this->prependExtensionConfig('not_existing', [
+            'new' => true,
+        ]);
     }
 }

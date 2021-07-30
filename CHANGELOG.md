@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+
+- Add compiler passes automatic detection
+- Add AbstractPrependConfiguration
+- Add prepend configuration automatic detection
+- Add doctrine mappings support in AbstractBundle
+
 ## 1.1.2
 
 - Add a more handy function in AbstractConfiguration

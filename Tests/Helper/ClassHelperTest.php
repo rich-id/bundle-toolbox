@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Helper\ClassHelper;
 use RichCongress\BundleToolbox\RichCongressBundleToolboxBundle;
 use RichCongress\BundleToolbox\Tests\Resources\DummyExtension;
+use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\BadPrependConfiguration;
+use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\DummyDoctrineMigrationPrependConfiguration;
 use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\DummyPrependConfiguration;
 
 /**
@@ -17,7 +19,9 @@ final class ClassHelperTest extends TestCase
     {
         $found = ClassHelper::findClassRelativelyToObject(DummyExtension::class, 'PrependConfiguration');
 
-        self::assertCount(1, $found);
+        self::assertCount(3, $found);
+        self::assertContains(BadPrependConfiguration::class, $found);
+        self::assertContains(DummyDoctrineMigrationPrependConfiguration::class, $found);
         self::assertContains(DummyPrependConfiguration::class, $found);
     }
 
@@ -25,7 +29,9 @@ final class ClassHelperTest extends TestCase
     {
         $found = ClassHelper::findClassRelativelyToObject(RichCongressBundleToolboxBundle::class, 'Tests/Resources/PrependConfiguration');
 
-        self::assertCount(1, $found);
+        self::assertCount(3, $found);
+        self::assertContains(BadPrependConfiguration::class, $found);
+        self::assertContains(DummyDoctrineMigrationPrependConfiguration::class, $found);
         self::assertContains(DummyPrependConfiguration::class, $found);
     }
 }
