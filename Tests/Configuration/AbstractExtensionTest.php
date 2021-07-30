@@ -5,6 +5,7 @@ namespace RichCongress\BundleToolbox\Tests\Configuration;
 use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Tests\Resources\DummyConfiguration;
 use RichCongress\BundleToolbox\Tests\Resources\DummyExtension;
+use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\DummyPrependConfiguration;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -81,5 +82,14 @@ class AbstractExtensionTest extends TestCase
 
         $container = new ContainerBuilder();
         $this->extension->badLoad([], $container);
+    }
+
+    public function testPrepend(): void
+    {
+        DummyPrependConfiguration::$flag = false;
+        $container = new ContainerBuilder();
+        $this->extension->prepend($container);
+
+        self::assertTrue(DummyPrependConfiguration::$flag);
     }
 }
