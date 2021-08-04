@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Fixes a bug with `Configuration::getKey()`.
+
 ## 1.2.0
 
 - Add compiler passes automatic detection
