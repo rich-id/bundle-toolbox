@@ -53,7 +53,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     public static function getKey(string $key): string
     {
-        return sprintf('%s.%s', self::getConfigNode(), $key);
+        return sprintf('%s.%s', static::getConfigNode(), $key);
     }
 
     /**
