@@ -1,0 +1,34 @@
+name: Tests
+on: [pull_request]
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-18.04
+        steps:
+            - name: Checkout 🛎️
+              uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
+
+            - name: Start docker 🔧
+              run: |
+                  docker-compose -f docker-compose.yml -f .github/docker-compose.yml up -d
+
+            - name: Cache multiple paths
+              uses: actions/cache@v2
+              with:
+                  path: |
+                      **/vendor
+                  key: ${{ runner.os }}-${{ hashFiles('*.lock') }}
+
+            - name: Install the dependencies 🔧
+              run: |
+                  docker-compose exec -T application composer install --prefer-dist --no-interaction --no-progress
+
+            - name: PHPInsights 🔧
+              run: |
+                  docker-compose exec -T application ./vendor/nunomaduro/phpinsights/bin/phpinsights  --no-interaction --min-quality=100 --min-architecture=100
+
+            - name: PHPStan 🔧
+              run: |
+                  docker-compose exec -T application ./vendor/phpstan/phpstan/phpstan

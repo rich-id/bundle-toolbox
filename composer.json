@@ -23,12 +23,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "RichCongress\\BundleToolbox\\": ""
+            "RichCongress\\BundleToolbox\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\RichCongress\\BundleToolbox\\": "Tests/"
+            "RichCongress\\BundleToolbox\\Tests\\": "tests/"
         }
     },
     "config": {

@@ -5,6 +5,7 @@ namespace RichCongress\BundleToolbox\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 use RichCongress\BundleToolbox\Helper\ClassHelper;
 use RichCongress\BundleToolbox\RichCongressBundleToolboxBundle;
+use RichCongress\BundleToolbox\Tests\Flag;
 use RichCongress\BundleToolbox\Tests\Resources\DummyExtension;
 use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\BadPrependConfiguration;
 use RichCongress\BundleToolbox\Tests\Resources\PrependConfiguration\DummyDoctrineMigrationPrependConfiguration;
@@ -27,7 +28,7 @@ final class ClassHelperTest extends TestCase
 
     public function testFindClassRelativelyToObjectForComplexePath(): void
     {
-        $found = ClassHelper::findClassRelativelyToObject(RichCongressBundleToolboxBundle::class, 'Tests/Resources/PrependConfiguration');
+        $found = ClassHelper::findClassRelativelyToObject(Flag::class, 'Resources/PrependConfiguration');
 
         self::assertCount(3, $found);
         self::assertContains(BadPrependConfiguration::class, $found);
