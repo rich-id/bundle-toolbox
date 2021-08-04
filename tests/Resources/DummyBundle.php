@@ -17,4 +17,14 @@ class DummyBundle extends AbstractBundle
         DummyCompilerPass::class,
         DummyRegularCompilerPass::class
     ];
+
+    protected static $doctrineAnnotationMapping = [
+        'test1' => 'test',
+        'test2' => 'test',
+    ];
+
+    protected static $doctrineAttributeMapping = [
+        'test1' => 'test',
+        'test2' => 'test',
+    ];
 }

@@ -6,6 +6,7 @@
 /phpunit.xml
 /phpunit-*.xml
 /phpunit-filter.php
+/.phpunit.result.cache
 
 # Auto-saved files
 *~
