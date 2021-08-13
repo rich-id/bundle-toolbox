@@ -5,6 +5,7 @@ namespace RichCongress\BundleToolbox\Configuration;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class AbstractCompilerPass
@@ -46,5 +47,19 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
         }
 
         return true;
+    }
+
+    /** @return Reference[] */
+    protected static function getReferencesByTag(ContainerBuilder $container, string $tag): array
+    {
+        $serviceConfigs = $container->findTaggedServiceIds($tag);
+        $serviceIds = array_keys($serviceConfigs);
+
+        return array_map(
+            static function (string $serviceId): Reference {
+                return new Reference($serviceId);
+            },
+            $serviceIds
+        );
     }
 }
