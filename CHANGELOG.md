@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+- Add `AbstractCompilerPass::getReferencesByTag` to easily get the references directly from a tag
+
 ## 1.2.1
 
 - Fixes a bug with `Configuration::getKey()`.
