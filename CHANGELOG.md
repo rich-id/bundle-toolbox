@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+
+- Add `AbstractDoctrineTypesPrependConfiguration` to easily add types to doctrine
+
 ## 1.2.2
 
 - Add `AbstractCompilerPass::getReferencesByTag` to easily get the references directly from a tag
