@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.4
+
+- Add `AbstractCompilerPass::getSortedReferencesByTag` to easily get the references directly from a tag and sort them
+
 ## 1.2.3
 
 - Add `AbstractDoctrineTypesPrependConfiguration` to easily add types to doctrine
