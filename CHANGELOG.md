@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+
+- Add `AbstractCompilerPass::getSortedReferencesByTag` to easily get the references directly from a tag and sort them
+
 ## 1.2.2
 
 - Add `AbstractCompilerPass::getReferencesByTag` to easily get the references directly from a tag

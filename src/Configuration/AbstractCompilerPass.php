@@ -62,4 +62,25 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
             $serviceIds
         );
     }
+
+    /** @return Reference[] */
+    protected static function getSortedReferencesByTag(ContainerBuilder $container, string $tag, callable $getPriority): array
+    {
+        $references = self::getReferencesByTag($container, $tag);
+        usort(
+            $references,
+            static function (Reference $left, Reference $right) use ($getPriority): int {
+                $leftPriority = $getPriority($left);
+                $rightPriority = $getPriority($right);
+
+                if ($leftPriority === $rightPriority) {
+                    return 0;
+                }
+
+                return $leftPriority > $rightPriority ? -1 : 1;
+            }
+        );
+
+        return $references;
+    }
 }
