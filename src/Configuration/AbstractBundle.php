@@ -22,11 +22,6 @@ abstract class AbstractBundle extends Bundle
     /**
      * @var array<string, string> ['Namespace' => 'path']
      */
-    protected static $doctrineAnnotationMapping = [];
-
-    /**
-     * @var array<string, string> ['Namespace' => 'path']
-     */
     protected static $doctrineAttributeMapping = [];
 
     /**
@@ -48,24 +43,7 @@ abstract class AbstractBundle extends Bundle
             $container->addCompilerPass(new $compilerPass());
         }
 
-        $this->addDoctrineAnnotationMapping($container);
         $this->addDoctrineAttributeMapping($container);
-    }
-
-    private function addDoctrineAnnotationMapping(ContainerBuilder $container): void
-    {
-        if (!\class_exists(DoctrineOrmMappingsPass::class)) {
-            return;
-        }
-
-        foreach (static::$doctrineAnnotationMapping as $namespace => $path) {
-            $container->addCompilerPass(
-                DoctrineOrmMappingsPass::createAnnotationMappingDriver(
-                    [$namespace],
-                    [$path]
-                )
-            );
-        }
     }
 
     private function addDoctrineAttributeMapping(ContainerBuilder $container): void
@@ -75,10 +53,13 @@ abstract class AbstractBundle extends Bundle
         }
 
         foreach (static::$doctrineAttributeMapping as $namespace => $path) {
-            // TODO Replace with DoctrineOrmMappingsPass::createAttributeMappingDriver one we upgrade to doctrine/doctrine-bundle 2.5
-            $driver = new Definition('Doctrine\ORM\Mapping\Driver\AttributeDriver', [[$path]]);
-            $doctrineCompilerPass = new DoctrineOrmMappingsPass($driver, [$namespace], [], false, []);
-            $container->addCompilerPass($doctrineCompilerPass);
+            $container->addCompilerPass(
+                DoctrineOrmMappingsPass::createAttributeMappingDriver(
+                    [$namespace],
+                    [$path],
+                    reportFieldsWhereDeclared: true,
+                )
+            );
         }
     }
 }
