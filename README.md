@@ -1,6 +1,6 @@
 # RichCongress Bundle Toolbox
 
-This version of the bundle requires Symfony 4.4+ and PHP 7.1+.
+This version of the bundle requires Symfony 6.0+ and PHP 8.1+.
 
 [![Package version](https://img.shields.io/packagist/v/richcongress/bundle-toolbox)](https://packagist.org/packages/richcongress/bundle-toolbox)
 [![Build Status](https://img.shields.io/travis/richcongress/bundle-toolbox.svg?branch=master)](https://travis-ci.org/richcongress/bundle-toolbox?branch=master)
