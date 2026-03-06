@@ -57,7 +57,6 @@ abstract class AbstractBundle extends Bundle
                 DoctrineOrmMappingsPass::createAttributeMappingDriver(
                     [$namespace],
                     [$path],
-                    reportFieldsWhereDeclared: true,
                 )
             );
         }
